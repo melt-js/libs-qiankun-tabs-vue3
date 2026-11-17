@@ -1,0 +1,35 @@
+import { Component, ComponentInternalInstance } from "vue";
+declare const TAB_VIEW_URL_RELATIVE_PREFIX = "relative:";
+declare const TAB_VIEW_URL_IFRAME_CONTROLLER_PREFIX = "iframe-controller:";
+export type TabViewUrlRelative = `${typeof TAB_VIEW_URL_RELATIVE_PREFIX}${string}`;
+export type TabViewUrlIframeController = `${typeof TAB_VIEW_URL_IFRAME_CONTROLLER_PREFIX}${string}`;
+declare function isTabViewHttpUrl(url: string | undefined): boolean;
+declare function isTabViewRelativeUrl(url: string | undefined): url is TabViewUrlRelative;
+declare function isTabViewIframeControllerUrl(url: string | undefined): url is TabViewUrlIframeController;
+declare function isTabViewIframeUrl(url: string | undefined): boolean;
+declare function createRelativeTabViewUrl(url: string): TabViewUrlRelative;
+declare function resolveIframeTabViewUrl(url: string): string;
+declare function createIframeControllerTabViewUrl(controllerUrl: string, iframeSrc?: string): TabViewUrlIframeController;
+declare function resolveIframeControllerTabViewUrl(url: string): {
+    controllerUrl: string;
+    src: string;
+    props: Record<string, string | string[]>;
+};
+export declare const TabViewUrl: {
+    createIframeController: typeof createIframeControllerTabViewUrl;
+    createRelative: typeof createRelativeTabViewUrl;
+    isHttp: typeof isTabViewHttpUrl;
+    isIframeController: typeof isTabViewIframeControllerUrl;
+    isIframe: typeof isTabViewIframeUrl;
+    isRelative: typeof isTabViewRelativeUrl;
+    resolveIframeController: typeof resolveIframeControllerTabViewUrl;
+    resolveIframe: typeof resolveIframeTabViewUrl;
+};
+export declare function stableStringify(value: unknown, seen?: WeakSet<object>): string;
+export declare function findParentPathsByPath(paths: string[], path: string | undefined): string[];
+export declare function jsonToObject<T extends string | object>(val: T, def?: {}): object;
+export declare function clone<T = unknown>(obj: T): T;
+export declare function createRandomString(length?: number): string;
+export declare function preloadComponent(component: Component): Promise<Component>;
+export declare function findVueComponent(node: ComponentInternalInstance, componentName: string): Component | null | undefined;
+export {};
